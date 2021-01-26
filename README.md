@@ -1,13 +1,20 @@
 # resume
 ## Features
-#### Landing page
-- Landing page with photo, name and greeting
-- Experience and diploma
+##### Landing page
+- Photo
+- Greeting with name
+- Scroll invitation
+##### Timeline
+- Diploma, internship and job
+- Animate with draggable cards
+##### Project showcase
 - Project showcase
+- Animate with cards
+##### Footer
 - Contact info : email, LinkedIn, .pdf resume
 
-### Projects
-- Covid Map
+### List of Projects
+- Covid Map ✔
 - Game
 - Subscription form
 - Shop front
