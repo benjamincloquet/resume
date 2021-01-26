@@ -1,5 +1,5 @@
 # resume
-### Features
+## Features
 - Landing page with photo, name and greeting
 - Experience and diploma
 - Project showcase
