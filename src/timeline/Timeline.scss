@@ -1,0 +1,23 @@
+.timeline {
+  padding: 15rem 10rem;
+  display: flex;
+  justify-content: flex-start;
+  align-content: flex-start;
+  flex-flow: row wrap;
+
+  background-color: #afe0a8;
+
+  &__title {
+    font-size: 5rem;
+    text-align: left;
+    transform: translate3d(0px, 0px, 2000px);
+    perspective: 1000px;
+  }
+
+  &__title-container {
+    width: 100%;
+    user-select: none;
+    -webkit-user-select: none;
+    padding-bottom: 2rem;
+  }
+}

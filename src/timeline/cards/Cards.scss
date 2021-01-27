@@ -1,0 +1,11 @@
+.cards {
+  height: 80vh;
+  width: 60vw;
+  overflow: hidden;
+  position: relative;
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+
+  background-color: white;
+}

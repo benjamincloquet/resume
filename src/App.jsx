@@ -1,6 +1,7 @@
 import React from 'react';
 import useSmoothScroll from './useSmoothScroll';
-import Header from './Header';
+import Header from './header/Header';
+import Timeline from './timeline/Timeline';
 import './App.css';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+      <Timeline />
     </div>
   );
 }
