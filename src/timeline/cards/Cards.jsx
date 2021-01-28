@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDrag } from 'react-use-gesture';
-import useDimensions from '../../useDimensions';
+import { useWidth } from '../../useElementBoundingRect';
 import Card from './Card';
 import './Cards.scss';
 
 const Cards = ({ steps, spring: [{ cardOffset }, setCardStyle] }) => {
-  const [ref, [cardFrameWidth]] = useDimensions();
+  const [ref, cardFrameWidth] = useWidth();
   const [cardIndex, setCardIndex] = useState(0);
   const dragThreshold = 50;
 

@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { animated } from 'react-spring';
-import useDimensions from '../../useDimensions';
+import { useHeight } from '../../useElementBoundingRect';
 import './ScrollingTitle.scss';
 
 const ScrollingTitle = ({ lines, offset }) => {
-  const [ref, [, boxHeight]] = useDimensions();
+  const [ref, boxHeight] = useHeight();
 
   const computeLineTransform = (index) => offset.interpolate((normalizedOffset) => `translateY(${(index + normalizedOffset) * boxHeight}px)`);
 

@@ -7,8 +7,13 @@ header {
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  --translate-x: -50%;
+  --translate-y: -50%;
+  --translate-z: 500px;
+  --rotate-y: 0;
+  transform: translate3d(var(--translate-x, 0), var(--translate-y, 0), var(--translate-z, 0)) rotateY(var(--rotate-y, 0));
   font-size: 5rem;
+  transform-style: preserve-3d;
 }
 
 .name {
@@ -17,4 +22,5 @@ header {
   top: 5%;
   transform: translate(-50%, -50%);
   font-size: 2rem;
+  transform-style: preserve-3d;
 }
