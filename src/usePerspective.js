@@ -1,25 +1,28 @@
-/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 import { useEffect, useRef } from 'react';
-import { useSpring } from 'react-spring';
+import { useSpring, interpolate } from 'react-spring';
 import useElementBoundingRect from './useElementBoundingRect';
 
-export default (existingRef) => {
+export default (existingRef, {
+  distance = 0, xRotationCoef = 0, yRotationCoef = 0, distanceCoef = 0,
+}) => {
   const [{ x, y }, set] = useSpring(() => ({ x: 0, y: 0 }));
   const [containerRef, boundingRect] = useElementBoundingRect(existingRef);
-  const ref = useRef(null);
+  const style = {
+    transform: interpolate([x, y], (interpolatedX, interpolatedY) => `rotateX(${-interpolatedY * yRotationCoef}deg) rotateY(${interpolatedX * xRotationCoef}deg) translateZ(${distance * Math.sqrt(interpolatedX ** 2 + interpolatedY ** 2) * distanceCoef}px)`),
+  };
 
   const onMouseMove = (event) => {
     if (!boundingRect) {
       return;
     }
     const {
-      left, width,
+      left, top, width, height,
     } = boundingRect;
-    const xOffset = event.x - left - (width / 2);
-    const rotationCoef = 1 / 25;
-    // ref.current.style.transform = [...ref.current.style.transform, { rotateY: `${-xOffset * rotationCoef}` }];
-    console.log(ref.current.style);
+    set({
+      x: event.x - left - (width / 2),
+      y: event.y - top - (height / 2),
+    });
   };
 
   useEffect(() => {
@@ -29,5 +32,5 @@ export default (existingRef) => {
     };
   }, [boundingRect]);
 
-  return [containerRef, ref];
+  return [containerRef, style];
 };

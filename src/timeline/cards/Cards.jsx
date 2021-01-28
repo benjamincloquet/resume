@@ -51,7 +51,7 @@ const Cards = ({ steps, spring: [{ cardOffset }, setCardStyle] }) => {
     },
   );
 
-  const computeCardTransform = (index) => cardOffset.interpolate((offset) => `translate(-50%, -50%) translateX(${offset + index * cardFrameWidth}px)`);
+  const computeCardTransform = (index) => cardOffset.interpolate((offset) => `translateX(${offset + index * cardFrameWidth}px)`);
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading

@@ -9,9 +9,6 @@
 
   &__title {
     font-size: 5rem;
-    text-align: left;
-    transform: translate3d(0px, 0px, 2000px);
-    perspective: 1000px;
   }
 
   &__title-container {
@@ -20,4 +17,6 @@
     -webkit-user-select: none;
     padding-bottom: 2rem;
   }
+
+  transform: skewY(-5deg);
 }
