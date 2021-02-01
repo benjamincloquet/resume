@@ -9,17 +9,17 @@ const useElementBoundingRect = (existingRef) => {
     setBoundingRect(ref.current?.getBoundingClientRect());
   }, [ref]);
 
-  return [ref, boundingRect];
+  return [boundingRect, ref];
 };
 
 const useWidth = (existingRef) => {
-  const [ref, boundingRect] = useElementBoundingRect(existingRef);
-  return [ref, boundingRect?.width];
+  const [boundingRect, ref] = useElementBoundingRect(existingRef);
+  return [boundingRect?.width, ref];
 };
 
 const useHeight = (existingRef) => {
-  const [ref, boundingRect] = useElementBoundingRect(existingRef);
-  return [ref, boundingRect?.height];
+  const [boundingRect, ref] = useElementBoundingRect(existingRef);
+  return [boundingRect?.height, ref];
 };
 
 export default useElementBoundingRect;

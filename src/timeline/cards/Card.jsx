@@ -1,20 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { animated } from 'react-spring';
 import './Card.scss';
 
-const Card = ({ title, style }) => (
-  <div className="card__container">
-    <animated.div className="card" style={style}>
-      <h2 className="card__title">{title}</h2>
-    </animated.div>
+const Card = ({ children }) => (
+  <div className="card">
+    {children}
   </div>
 );
 
 Card.propTypes = {
-  title: PropTypes.string.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  style: PropTypes.object.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Card;

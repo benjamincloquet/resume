@@ -1,51 +1,65 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
 import Cards from './cards/Cards';
 import ScrollingTitle from './scrolling-title/ScrollingTitle';
+import LocationIcon from '../icons/LocationIcon';
+import DiplomaIcon from '../icons/DiplomaIcon';
 import usePerspective from '../usePerspective';
 import './Timeline.scss';
 
-const steps = [
-  {
-    key: 'step1',
-    scrollingTitle: 'a student',
-    title: 'Master\'s degree in engineering',
-  },
-  {
-    key: 'step2',
-    scrollingTitle: 'an intern',
-    title: 'Data visualization programming internship',
-  },
-  {
-    key: 'step3',
-    scrollingTitle: 'a gameplay programmer',
-    title: 'Ubisoft Montpellier',
-  },
+const scrollingTitleLines = ['a student', 'an intern', 'a gameplay programmer', 'a web developer'];
+
+const renderTimelineEvents = () => [
+  <div id="event1" key="event1-content">
+    <h1 className="timeline__event__title">Master&apos;s degree in engineering</h1>
+    <div className="timeline__event__location">
+      <LocationIcon />
+      <h2>Telecom SudParis, France</h2>
+    </div>
+    <p className="timeline__event__description">
+      I learned software engineering, management and
+      {' '}
+      <a href="blank">the ins and outs of making a video game in 48 hours.</a>
+    </p>
+  </div>,
+  <div id="event2" key="event2-content">
+    <h1 className="timeline__event__title">Data visualization programming internship</h1>
+    <div className="timeline__event__location">
+      <LocationIcon />
+      <h2>Universiti Teknologi PETRONAS, Malaysia</h2>
+    </div>
+  </div>,
 ];
 
 const Timeline = () => {
-  const [containerRef, titleStyle] = usePerspective(null, {
+  const [titlePerspectiveStyle, perspectiveRef] = usePerspective({
     distance: 100, xRotationCoef: 1 / 150, yRotationCoef: 1 / 150, distanceCoef: 1 / 500,
   });
 
-  const cardSpring = useSpring(() => ({
-    cardOffset: 0,
-    normalizedOffset: 0,
+  const [{ cardPixelOffset, eventIndex }, setSpring] = useSpring(() => ({
+    cardPixelOffset: 0,
+    eventIndex: 0,
   }));
 
-  const [{ normalizedOffset }] = cardSpring;
-
   return (
-    <div className="timeline" ref={containerRef}>
-      <animated.div className="timeline__title-container" style={titleStyle}>
-        <h1 className="timeline__title">My Experience as</h1>
-        <ScrollingTitle
-          lines={steps.map(({ scrollingTitle }) => scrollingTitle)}
-          offset={normalizedOffset}
-        />
-      </animated.div>
-      <Cards steps={steps} spring={cardSpring} />
+    <div className="timeline" ref={perspectiveRef}>
+      <div className="timeline__events">
+        <animated.div className="timeline__title__container" style={titlePerspectiveStyle}>
+          <h1 className="timeline__title">My experience as</h1>
+          <ScrollingTitle
+            lines={scrollingTitleLines}
+            currentLineIndex={eventIndex}
+          />
+        </animated.div>
+        <Cards
+          spring={[{ cardPixelOffset }, setSpring]}
+        >
+          {renderTimelineEvents()}
+        </Cards>
+      </div>
+      <div className="timeline__icon">
+        <DiplomaIcon />
+      </div>
     </div>
   );
 };

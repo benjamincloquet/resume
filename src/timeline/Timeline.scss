@@ -1,22 +1,48 @@
 .timeline {
   padding: 15rem 10rem;
   display: flex;
-  justify-content: flex-start;
-  align-content: flex-start;
+  align-items: center;
   flex-flow: row wrap;
 
   background-color: #afe0a8;
 
+  transform: skewY(-4deg);
+
   &__title {
     font-size: 5rem;
+
+    &__container {
+      width: 100%;
+      user-select: none;
+      -webkit-user-select: none;
+      padding-bottom: 2rem;
+    }
   }
 
-  &__title-container {
-    width: 100%;
-    user-select: none;
-    -webkit-user-select: none;
-    padding-bottom: 2rem;
+  &__events {
+    width: 70%;
   }
 
-  transform: skewY(-5deg);
+  &__event {
+    &__title {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+  
+    &__location {
+      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+  
+      &__icon {
+        display: inline-block;
+        margin-right: 1rem;
+      }
+    }
+
+    &__description {
+      line-height: 2.5rem;
+    }
+  }
 }

@@ -1,6 +1,11 @@
 @font-face {
+  font-family: 'AlteHaasGroteskBold';
+  src: local('AlteHaasGroteskBold'), url(./fonts/AlteHaasGroteskBold.ttf) format('opentype');
+}
+
+@font-face {
   font-family: 'AlteHaasGrotesk';
-  src: local('AlteHaasGrotesk'), url(./fonts/AlteHaasGroteskBold.ttf) format('opentype');
+  src: local('AlteHaasGrotesk'), url(./fonts/AlteHaasGroteskRegular.ttf) format('opentype');
 }
 
 body {
@@ -10,13 +15,13 @@ body {
 * {
   border: 0;
   padding: 0;
-  font-family: 'AlteHaasGrotesk', sans-serif;
 }
 
-.App {
-  height: 300vh;
+h1, h2, h3, h4, h5, h6, a, p {
+  font-family: 'AlteHaasGroteskBold', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6 {
+a, p {
   font-family: 'AlteHaasGrotesk', sans-serif;
+  font-size: 2rem;
 }

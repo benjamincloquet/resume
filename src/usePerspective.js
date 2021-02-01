@@ -3,11 +3,11 @@ import { useEffect, useRef } from 'react';
 import { useSpring, interpolate } from 'react-spring';
 import useElementBoundingRect from './useElementBoundingRect';
 
-export default (existingRef, {
+export default ({
   distance = 0, xRotationCoef = 0, yRotationCoef = 0, distanceCoef = 0,
-}) => {
+}, existingRef) => {
   const [{ x, y }, set] = useSpring(() => ({ x: 0, y: 0 }));
-  const [containerRef, boundingRect] = useElementBoundingRect(existingRef);
+  const [boundingRect, ref] = useElementBoundingRect(existingRef);
   const style = {
     transform: interpolate([x, y], (interpolatedX, interpolatedY) => `rotateX(${-interpolatedY * yRotationCoef}deg) rotateY(${interpolatedX * xRotationCoef}deg) translateZ(${distance * Math.sqrt(interpolatedX ** 2 + interpolatedY ** 2) * distanceCoef}px)`),
   };
@@ -32,5 +32,5 @@ export default (existingRef, {
     };
   }, [boundingRect]);
 
-  return [containerRef, style];
+  return [style, ref];
 };

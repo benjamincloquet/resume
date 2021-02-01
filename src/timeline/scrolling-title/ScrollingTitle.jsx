@@ -4,10 +4,10 @@ import { animated } from 'react-spring';
 import { useHeight } from '../../useElementBoundingRect';
 import './ScrollingTitle.scss';
 
-const ScrollingTitle = ({ lines, offset }) => {
-  const [ref, boxHeight] = useHeight();
+const ScrollingTitle = ({ lines, currentLineIndex }) => {
+  const [boxHeight, ref] = useHeight();
 
-  const computeLineTransform = (index) => offset.interpolate((normalizedOffset) => `translateY(${(index + normalizedOffset) * boxHeight}px)`);
+  const computeLineTransform = (lineIndex) => currentLineIndex.interpolate((currentLineIndexValue) => `translateY(${(lineIndex + currentLineIndexValue) * boxHeight}px)`);
 
   return (
     <div className="scrolling-title__box" ref={ref}>
@@ -19,7 +19,7 @@ const ScrollingTitle = ({ lines, offset }) => {
 ScrollingTitle.propTypes = {
   lines: PropTypes.arrayOf(PropTypes.string).isRequired,
   // eslint-disable-next-line react/forbid-prop-types
-  offset: PropTypes.object.isRequired,
+  currentLineIndex: PropTypes.object.isRequired,
 };
 
 export default ScrollingTitle;

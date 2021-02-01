@@ -1,27 +1,31 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { animated } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
-import { useWidth } from '../../useElementBoundingRect';
 import Card from './Card';
+import { useWidth } from '../../useElementBoundingRect';
+import usePerspective from '../../usePerspective';
 import './Cards.scss';
 
-const Cards = ({ steps, spring: [{ cardOffset }, setCardStyle] }) => {
-  const [ref, cardFrameWidth] = useWidth();
+const Cards = ({ spring, children }) => {
+  const [{ cardPixelOffset }, setSpring] = spring;
+  const getChildrenArray = () => React.Children.toArray(children);
+  const [cardFrameWidth, cardFrameRef] = useWidth();
   const [cardIndex, setCardIndex] = useState(0);
   const dragThreshold = 50;
 
-  const clampCardIndex = (index) => Math.min(Math.max(index, 0), steps.length - 1);
+  const clampCardIndex = (index) => Math.min(Math.max(index, 0), getChildrenArray().length - 1);
 
-  const setCardOffset = (offset) => {
-    setCardStyle({
-      cardOffset: offset,
-      normalizedOffset: offset / cardFrameWidth,
+  const setCardPixelOffset = (newCardPixelOffset) => {
+    setSpring({
+      cardPixelOffset: newCardPixelOffset,
+      eventIndex: newCardPixelOffset / cardFrameWidth,
     });
   };
 
   const setCardOffsetWithIndex = (index) => {
     setCardIndex(index);
-    setCardOffset(-index * cardFrameWidth);
+    setCardPixelOffset(-index * cardFrameWidth);
   };
 
   const onDragRelease = (x) => {
@@ -43,29 +47,35 @@ const Cards = ({ steps, spring: [{ cardOffset }, setCardStyle] }) => {
           onDragRelease(x);
         }
       } else {
-        setCardOffset(x);
+        setCardPixelOffset(x);
       }
     },
     {
-      initial: () => [cardOffset.getValue(), 0],
+      initial: () => [cardPixelOffset.getValue(), 0],
     },
   );
 
-  const computeCardTransform = (index) => cardOffset.interpolate((offset) => `translateX(${offset + index * cardFrameWidth}px)`);
+  const computeCardTransform = (index) => cardPixelOffset.interpolate((offset) => `translateX(${offset + index * cardFrameWidth}px)`);
+
+  const [cardPerspectiveStyle] = usePerspective({
+    distance: 50, xRotationCoef: 1 / 150, yRotationCoef: 1 / 150, distanceCoef: 1 / 500,
+  }, cardFrameRef);
 
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
-    <div className="cards" ref={ref} {...cardDragBind()}>
-      {steps.map(({ key, title }, index) => (
-        <Card key={key} title={title} style={{ transform: computeCardTransform(index) }} />
+    <animated.div className="cards" ref={cardFrameRef} style={cardPerspectiveStyle} {...cardDragBind()}>
+      {getChildrenArray().map((child, index) => (
+        <animated.div key={child.props.id} className="card__container" style={{ transform: computeCardTransform(index) }}>
+          <Card>{child}</Card>
+        </animated.div>
       ))}
-    </div>
+    </animated.div>
   );
 };
 
 Cards.propTypes = {
-  steps: PropTypes.arrayOf(PropTypes.shape).isRequired,
   spring: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default Cards;
