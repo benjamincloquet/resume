@@ -1,13 +1,11 @@
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
-import Cards from './cards/Cards';
-import ScrollingTitle from './scrolling-title/ScrollingTitle';
-import LocationIcon from '../icons/LocationIcon';
-import DiplomaIcon from '../icons/DiplomaIcon';
+import Cards from '../cards/Cards';
+import ScrollingText from '../scrolling-text/ScrollingText';
+import LocationIcon from '../svg/LocationIcon';
 import usePerspective from '../usePerspective';
+import { titleLines, years } from './timeline-data';
 import './Timeline.scss';
-
-const scrollingTitleLines = ['a student', 'an intern', 'a gameplay programmer', 'a web developer'];
 
 const renderTimelineEvents = () => [
   <div id="event1" key="event1-content">
@@ -71,9 +69,9 @@ const renderTimelineEvents = () => [
 ];
 
 const Timeline = () => {
-  const [titlePerspectiveStyle, perspectiveRef] = usePerspective({
-    distance: 100, xRotationCoef: 1 / 150, yRotationCoef: 1 / 150, distanceCoef: 1 / 500,
-  });
+  const [titlePerspectiveStyle, perspectiveRef] = usePerspective({ factor: 3 });
+  const [cardsPerspectiveStyle] = usePerspective({ factor: 6 }, perspectiveRef);
+  const [yearPerspectiveStyle] = usePerspective({ factor: 2 }, perspectiveRef);
 
   const [{ cardPixelOffset, eventIndex }, setSpring] = useSpring(() => ({
     cardPixelOffset: 0,
@@ -82,23 +80,23 @@ const Timeline = () => {
 
   return (
     <div className="timeline" ref={perspectiveRef}>
-      <div className="timeline__events">
-        <animated.div className="timeline__title__container" style={titlePerspectiveStyle}>
-          <h1 className="timeline__title">My experience as</h1>
-          <ScrollingTitle
-            lines={scrollingTitleLines}
-            currentLineIndex={eventIndex}
-          />
-        </animated.div>
+      <animated.div className="timeline__title__container" style={titlePerspectiveStyle}>
+        <h1 className="timeline__title">My experience as</h1>
+        <ScrollingText
+          lines={titleLines}
+          currentLineIndex={eventIndex}
+        />
+      </animated.div>
+      <animated.div className="timeline__year" style={yearPerspectiveStyle}>
+        <ScrollingText lines={years} currentLineIndex={eventIndex} />
+      </animated.div>
+      <animated.div className="timeline__events" style={cardsPerspectiveStyle}>
         <Cards
           spring={[{ cardPixelOffset }, setSpring]}
         >
           {renderTimelineEvents()}
         </Cards>
-      </div>
-      <div className="timeline__icon">
-        <DiplomaIcon />
-      </div>
+      </animated.div>
     </div>
   );
 };

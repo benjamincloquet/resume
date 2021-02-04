@@ -10,6 +10,8 @@
 
 body {
   perspective: 10000px;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 * {

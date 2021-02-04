@@ -4,25 +4,17 @@ import usePerspective from '../usePerspective';
 import './Header.scss';
 
 const Header = () => {
-  const [namePerspectiveStyle, headerPerspectiveRef] = usePerspective({
-    distance: 200, xRotationCoef: 1 / 25, yRotationCoef: 1 / 25, distanceCoef: 1 / 500,
-  });
-  const [greetingPerspectiveStyle1] = usePerspective({
-    distance: 200, xRotationCoef: 1 / 25, yRotationCoef: 1 / 25, distanceCoef: 1 / 500,
-  }, headerPerspectiveRef);
-  const [greetingPerspectiveStyle2] = usePerspective({
-    distance: 100, xRotationCoef: 1 / 25, yRotationCoef: 1 / 25, distanceCoef: 1 / 500,
-  }, headerPerspectiveRef);
-  const [greetingPerspectiveStyle3] = usePerspective({
-    distance: 5, xRotationCoef: 1 / 25, yRotationCoef: 1 / 25, distanceCoef: 1 / 500,
-  }, headerPerspectiveRef);
+  const [namePerspectiveStyle, headerPerspectiveRef] = usePerspective({ factor: 1 });
+  const [greetingPerspectiveStyle1] = usePerspective({ factor: 20 }, headerPerspectiveRef);
+  const [greetingPerspectiveStyle2] = usePerspective({ factor: 10 }, headerPerspectiveRef);
+  const [greetingPerspectiveStyle3] = usePerspective({ factor: 1 }, headerPerspectiveRef);
 
   return (
-    <header ref={headerPerspectiveRef}>
+    <header>
       <div className="name__container">
         <animated.h6 className="name" style={namePerspectiveStyle}>benjamin cloquet</animated.h6>
       </div>
-      <div className="greeting__container">
+      <div className="greeting__container" ref={headerPerspectiveRef}>
         <animated.h1 className="greeting greeting--3" style={greetingPerspectiveStyle3}>Hello</animated.h1>
       </div>
       <div className="greeting__container">

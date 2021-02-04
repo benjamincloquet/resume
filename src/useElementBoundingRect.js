@@ -7,6 +7,16 @@ const useElementBoundingRect = (existingRef) => {
 
   useLayoutEffect(() => {
     setBoundingRect(ref.current?.getBoundingClientRect());
+
+    const handleResize = () => {
+      setBoundingRect(ref.current?.getBoundingClientRect());
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, [ref]);
 
   return [boundingRect, ref];

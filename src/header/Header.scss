@@ -1,11 +1,15 @@
+@import '../colors.scss';
+
 header {
   position: relative;
   height: 100vh;
 }
 
 .greeting {
-  font-size: 5rem;
-  transform-style: preserve-3d;
+  font-size: 15rem;
+  color: $green-base;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 
   &__container {
     position: absolute;
@@ -15,21 +19,23 @@ header {
   }
 
   &--1 {
-    color: red;
+    opacity: 1;
   }
 
   &--2 {
-    color: green;
+    opacity: 0.8;
   }
 
   &--3 {
-    color: blue;
+    opacity: 0.6;
   }
 }
 
 .name {
   font-size: 2rem;
-  transform-style: preserve-3d;
+  color: $green-dark;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: black;
 
   &__container {
     position: absolute;

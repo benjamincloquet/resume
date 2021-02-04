@@ -1,15 +1,23 @@
-/* eslint-disable no-unused-vars */
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useSpring, interpolate } from 'react-spring';
 import useElementBoundingRect from './useElementBoundingRect';
 
-export default ({
-  distance = 0, xRotationCoef = 0, yRotationCoef = 0, distanceCoef = 0,
-}, existingRef) => {
-  const [{ x, y }, set] = useSpring(() => ({ x: 0, y: 0 }));
+export default (params, existingRef) => {
+  const [{ mouseX, mouseY }, set] = useSpring(() => ({ mouseX: 0, mouseY: 0 }));
   const [boundingRect, ref] = useElementBoundingRect(existingRef);
+
+  const computeTranslation = (x, y) => ({
+    xTranslation: (x * (params.factor || 1)) / 100,
+    yTranslation: (y * (params.factor || 1)) / 100,
+  });
+
+  const computeTransform = (x, y) => {
+    const { xTranslation, yTranslation } = computeTranslation(x, y);
+    return `translateX(${xTranslation}px) translateY(${yTranslation}px)`;
+  };
+
   const style = {
-    transform: interpolate([x, y], (interpolatedX, interpolatedY) => `rotateX(${-interpolatedY * yRotationCoef}deg) rotateY(${interpolatedX * xRotationCoef}deg) translateZ(${distance * Math.sqrt(interpolatedX ** 2 + interpolatedY ** 2) * distanceCoef}px)`),
+    transform: interpolate([mouseX, mouseY], (x, y) => computeTransform(x, y)),
   };
 
   const onMouseMove = (event) => {
@@ -20,8 +28,8 @@ export default ({
       left, top, width, height,
     } = boundingRect;
     set({
-      x: event.x - left - (width / 2),
-      y: event.y - top - (height / 2),
+      mouseX: event.x - left - (width / 2),
+      mouseY: event.y - top - (height / 2),
     });
   };
 

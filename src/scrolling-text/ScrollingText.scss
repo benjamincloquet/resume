@@ -1,12 +1,10 @@
-.scrolling-title {
+.scrolling-text {
   &__box {
-    height: 6rem;
     overflow: hidden;
     position: relative;
     width: 100%;
   }
 
-  font-size: 5rem;
   position: absolute;
   top: 0;
   left: 0;

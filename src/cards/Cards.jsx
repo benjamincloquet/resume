@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { animated } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 import Card from './Card';
-import { useWidth } from '../../useElementBoundingRect';
-import usePerspective from '../../usePerspective';
+import { useWidth } from '../useElementBoundingRect';
+import usePerspective from '../usePerspective';
 import './Cards.scss';
 
 const Cards = ({ spring, children }) => {
@@ -58,7 +58,7 @@ const Cards = ({ spring, children }) => {
   const computeCardTransform = (index) => cardPixelOffset.interpolate((offset) => `translateX(${offset + index * cardFrameWidth}px)`);
 
   const [cardPerspectiveStyle] = usePerspective({
-    distance: 50, xRotationCoef: 1 / 150, yRotationCoef: 1 / 150, distanceCoef: 1 / 500,
+    distance: 50, rotationFactor: 1 / 150,
   }, cardFrameRef);
 
   return (
