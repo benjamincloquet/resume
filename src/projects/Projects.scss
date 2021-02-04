@@ -1,0 +1,15 @@
+.projects {
+  padding: 10rem 5rem;
+  transform: skewY(-4deg);
+
+  &__title {
+    font-size: 6.5rem;
+    padding-bottom: 3rem;
+    margin-left: 1rem;
+  }
+
+  &__box {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

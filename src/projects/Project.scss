@@ -1,0 +1,42 @@
+@import "../colors.scss";
+
+.project {
+  border: 3px solid black;
+  padding: 1rem;
+  margin: 2rem;
+  cursor: pointer;
+  transition: transform 1s ease, border-color 0.5s ease;
+
+  &__box {
+    flex-basis: 50%;
+  }
+
+  &:hover {
+    transition: transform 1s ease, border-color 0.5s ease;
+    transform: scale(1.05);
+    border-color: $green-base;
+  }
+
+  &__title {
+    font-size: 3rem;
+  }
+
+  &__description {
+    margin-top: 0.5rem;
+    font-size: 2rem;
+  }
+
+  &__github {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+
+    &__text {
+      font-size: 1.5rem;
+    }
+
+    &__icon {
+      width: 3rem;
+    }
+  }
+}
