@@ -13,7 +13,7 @@ const Projects = () => {
       <animated.h1 className="projects__title" style={titlePerspective}>My projects</animated.h1>
       <div className="projects__box">
         {projects.map((project) => (
-          <Project project={project} />
+          <Project key={project.id} project={project} />
         ))}
       </div>
     </div>

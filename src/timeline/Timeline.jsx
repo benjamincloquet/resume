@@ -17,7 +17,7 @@ const renderTimelineEvents = () => [
     <p className="timeline__event__description">
       I learned software engineering, management and
       {' '}
-      <a href="https://kevcouscous.itch.io/koro-unijam2017">the ins and outs of making a video game in 48 hours.</a>
+      <a href="https://kevcouscous.itch.io/koro-unijam2017" onClick={(e) => { e.stopPropagation(); }}>the ins and outs of making a video game in 48 hours.</a>
     </p>
   </div>,
   <div id="event2" key="event2-content">

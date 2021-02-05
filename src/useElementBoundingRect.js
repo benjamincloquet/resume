@@ -6,16 +6,19 @@ const useElementBoundingRect = (existingRef) => {
   const [boundingRect, setBoundingRect] = useState(null);
 
   useLayoutEffect(() => {
-    setBoundingRect(ref.current?.getBoundingClientRect());
+    const updateBoundingRect = () => (setBoundingRect({
+      left: ref.current?.getBoundingClientRect().left + window.scrollX,
+      top: ref.current?.getBoundingClientRect().top + window.scrollY,
+      width: ref.current?.getBoundingClientRect().width,
+      height: ref.current?.getBoundingClientRect().height,
+    }));
 
-    const handleResize = () => {
-      setBoundingRect(ref.current?.getBoundingClientRect());
-    };
+    updateBoundingRect();
 
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', updateBoundingRect);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', updateBoundingRect);
     };
   }, [ref]);
 

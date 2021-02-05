@@ -39,6 +39,10 @@
 
     &__description {
       line-height: 2.5rem;
+
+      & a {
+        text-decoration: underline;
+      }
     }
   }
   

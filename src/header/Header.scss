@@ -44,3 +44,26 @@ header {
     transform: translate(-50%, -50%);
   }
 }
+
+.scroll-tip {
+  font-size: 1.5rem;
+
+  &__container {
+    position: absolute;
+    left: 50%;
+    bottom: 5%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.down-arrow {
+  margin-top: 1rem;
+  width: 0; 
+  height: 0; 
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 15px solid black;
+}

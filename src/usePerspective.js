@@ -28,8 +28,8 @@ export default (params, existingRef) => {
       left, top, width, height,
     } = boundingRect;
     set({
-      mouseX: event.x - left - (width / 2),
-      mouseY: event.y - top - (height / 2),
+      mouseX: event.x - (left - window.scrollX) - (width / 2),
+      mouseY: event.y - (top - window.scrollY) - (height / 2),
     });
   };
 
