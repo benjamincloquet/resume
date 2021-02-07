@@ -20,5 +20,6 @@ module.exports = {
   rules: {
     'no-console': 0,
     'linebreak-style': 0,
+    'max-len': ['error', { code: 200, ignoreStrings: true }],
   },
 };

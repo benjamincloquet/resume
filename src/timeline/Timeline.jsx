@@ -73,9 +73,8 @@ const Timeline = () => {
   const [cardsPerspectiveStyle] = usePerspective({ factor: 6 }, perspectiveRef);
   const [yearPerspectiveStyle] = usePerspective({ factor: 2 }, perspectiveRef);
 
-  const [{ cardPixelOffset, eventIndex }, setSpring] = useSpring(() => ({
-    cardPixelOffset: 0,
-    eventIndex: 0,
+  const [{ selectedIndex }, setSpring] = useSpring(() => ({
+    selectedIndex: 0,
   }));
 
   return (
@@ -84,15 +83,15 @@ const Timeline = () => {
         <h1 className="timeline__title">My experience as</h1>
         <ScrollingText
           lines={titleLines}
-          currentLineIndex={eventIndex}
+          currentLineIndex={selectedIndex}
         />
       </animated.div>
       <animated.div className="timeline__year" style={yearPerspectiveStyle}>
-        <ScrollingText lines={years} currentLineIndex={eventIndex} />
+        <ScrollingText lines={years} currentLineIndex={selectedIndex} />
       </animated.div>
       <animated.div className="timeline__events" style={cardsPerspectiveStyle}>
         <Cards
-          spring={[{ cardPixelOffset }, setSpring]}
+          spring={[{ selectedIndex }, setSpring]}
         >
           {renderTimelineEvents()}
         </Cards>

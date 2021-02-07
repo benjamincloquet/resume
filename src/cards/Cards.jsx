@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { animated } from 'react-spring';
@@ -8,33 +9,36 @@ import usePerspective from '../usePerspective';
 import './Cards.scss';
 
 const Cards = ({ spring, children }) => {
-  const [{ cardPixelOffset }, setSpring] = spring;
+  const [{ selectedIndex }, setSpring] = spring;
   const getChildrenArray = () => React.Children.toArray(children);
   const [cardFrameWidth, cardFrameRef] = useWidth();
-  const [cardIndex, setCardIndex] = useState(0);
+  const [lastSelectedCardIndex, setLastSelectedCardIndex] = useState(0);
   const dragThreshold = 50;
 
-  const clampCardIndex = (index) => Math.min(Math.max(index, 0), getChildrenArray().length - 1);
+  const clampCardIndex = (cardIndex) => Math.min(Math.max(cardIndex, 0), getChildrenArray().length - 1);
 
-  const setCardPixelOffset = (newCardPixelOffset) => {
+  const getIndexFromOffset = (offset) => -offset / cardFrameWidth;
+
+  const getOffsetFromIndex = (index) => -index * cardFrameWidth;
+
+  const setSelectedIndex = (newSelectedIndex) => {
     setSpring({
-      cardPixelOffset: newCardPixelOffset,
-      eventIndex: newCardPixelOffset / cardFrameWidth,
+      selectedIndex: newSelectedIndex,
     });
   };
 
-  const setCardOffsetWithIndex = (index) => {
-    setCardIndex(index);
-    setCardPixelOffset(-index * cardFrameWidth);
+  const forceSelectedIndex = (newSelectedIndex) => {
+    setLastSelectedCardIndex(newSelectedIndex);
+    setSelectedIndex(newSelectedIndex);
   };
 
   const onDragRelease = (x) => {
-    if (x + cardIndex * cardFrameWidth > dragThreshold) {
-      setCardOffsetWithIndex(clampCardIndex(cardIndex - 1));
-    } else if (x + cardIndex * cardFrameWidth < -dragThreshold) {
-      setCardOffsetWithIndex(clampCardIndex(cardIndex + 1));
+    if (x + lastSelectedCardIndex * cardFrameWidth > dragThreshold) {
+      forceSelectedIndex(clampCardIndex(lastSelectedCardIndex - 1));
+    } else if (x + lastSelectedCardIndex * cardFrameWidth < -dragThreshold) {
+      forceSelectedIndex(clampCardIndex(lastSelectedCardIndex + 1));
     } else {
-      setCardOffsetWithIndex(cardIndex);
+      forceSelectedIndex(lastSelectedCardIndex);
     }
   };
 
@@ -42,34 +46,51 @@ const Cards = ({ spring, children }) => {
     ({ movement: [x], down, tap }) => {
       if (!down) {
         if (tap) {
-          setCardOffsetWithIndex(clampCardIndex(cardIndex + 1));
+          forceSelectedIndex(clampCardIndex(lastSelectedCardIndex + 1));
         } else {
           onDragRelease(x);
         }
       } else {
-        setCardPixelOffset(x);
+        setSelectedIndex(getIndexFromOffset(x));
       }
     },
     {
-      initial: () => [cardPixelOffset.getValue(), 0],
+      initial: () => [getOffsetFromIndex(selectedIndex.getValue()), 0],
     },
   );
 
-  const computeCardTransform = (index) => cardPixelOffset.interpolate((offset) => `translateX(${offset + index * cardFrameWidth}px)`);
+  const computeCardTransform = (cardIndex) => selectedIndex.interpolate((selectedIndexValue) => `translateX(${getOffsetFromIndex(selectedIndexValue - cardIndex)}px)`);
 
-  const [cardPerspectiveStyle] = usePerspective({
-    distance: 50, rotationFactor: 1 / 150,
-  }, cardFrameRef);
+  const [cardPerspectiveStyle] = usePerspective({ factor: 2 }, cardFrameRef);
+
+  const computeCounterOpacity = (cardIndex, selectedIndexValue) => {
+    const value = Math.min(Math.max(1 - (Math.abs(cardIndex - selectedIndexValue)), 0), 1);
+    return value;
+  };
+
+  const computeCounterStyle = (cardIndex) => ({
+    backgroundColor: selectedIndex.interpolate((selectedIndexValue) => `rgba(0, 0, 0, ${computeCounterOpacity(cardIndex, selectedIndexValue)})`),
+  });
+
+  const handleCounterClick = (cardIndex) => {
+    forceSelectedIndex(cardIndex);
+  };
 
   return (
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    <animated.div className="cards" ref={cardFrameRef} style={cardPerspectiveStyle} {...cardDragBind()}>
-      {getChildrenArray().map((child, index) => (
-        <animated.div key={child.props.id} className="card__container" style={{ transform: computeCardTransform(index) }}>
-          <Card>{child}</Card>
-        </animated.div>
-      ))}
-    </animated.div>
+    <>
+      <animated.div className="cards" ref={cardFrameRef} style={cardPerspectiveStyle} {...cardDragBind()}>
+        {getChildrenArray().map((child, index) => (
+          <animated.div key={child.props.id} className="card__container" style={{ transform: computeCardTransform(index) }}>
+            <Card>{child}</Card>
+          </animated.div>
+        ))}
+      </animated.div>
+      <div className="cards__counter__container">
+        {getChildrenArray().map((child, index) => (
+          <animated.div key={`${child.props.id}-counter`} className="cards__counter" style={computeCounterStyle(index)} onClick={() => handleCounterClick(index)} />
+        ))}
+      </div>
+    </>
   );
 };
 

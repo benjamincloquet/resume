@@ -7,7 +7,7 @@ import './ScrollingText.scss';
 const ScrollingText = ({ lines, currentLineIndex }) => {
   const [boxHeight, ref] = useHeight();
 
-  const computeLineTransform = (lineIndex) => currentLineIndex.interpolate((currentLineIndexValue) => `translateY(${(lineIndex + currentLineIndexValue) * boxHeight}px)`);
+  const computeLineTransform = (lineIndex) => currentLineIndex.interpolate((currentLineIndexValue) => `translateY(${(lineIndex - currentLineIndexValue) * boxHeight}px)`);
 
   return (
     <div className="scrolling-text__box" ref={ref}>
