@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/benjamincloquet/resume/static/css/main.5a0a3d78.chunk.css",
+    "main.js": "/benjamincloquet/resume/static/js/main.532dfbc7.chunk.js",
+    "main.js.map": "/benjamincloquet/resume/static/js/main.532dfbc7.chunk.js.map",
+    "runtime-main.js": "/benjamincloquet/resume/static/js/runtime-main.dc5a82c7.js",
+    "runtime-main.js.map": "/benjamincloquet/resume/static/js/runtime-main.dc5a82c7.js.map",
+    "static/js/2.7b99039f.chunk.js": "/benjamincloquet/resume/static/js/2.7b99039f.chunk.js",
+    "static/js/2.7b99039f.chunk.js.map": "/benjamincloquet/resume/static/js/2.7b99039f.chunk.js.map",
+    "index.html": "/benjamincloquet/resume/index.html",
+    "static/css/main.5a0a3d78.chunk.css.map": "/benjamincloquet/resume/static/css/main.5a0a3d78.chunk.css.map",
+    "static/js/2.7b99039f.chunk.js.LICENSE.txt": "/benjamincloquet/resume/static/js/2.7b99039f.chunk.js.LICENSE.txt",
+    "static/media/App.css": "/benjamincloquet/resume/static/media/AlteHaasGroteskRegular.6ae6623e.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.dc5a82c7.js",
+    "static/js/2.7b99039f.chunk.js",
+    "static/css/main.5a0a3d78.chunk.css",
+    "static/js/main.532dfbc7.chunk.js"
+  ]
+}
