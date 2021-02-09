@@ -1,0 +1,35 @@
+.about {
+  position: relative;
+  height: 40vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  transform: skewY(-4deg);
+  margin: 8rem 0rem;
+  overflow: hidden;
+
+  &__title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+
+    &__container {
+      width: 18rem;
+      height: 27rem;
+      position: relative;
+      top: -2rem;
+      transform: skewY(4deg);
+      margin-right: 5rem;
+    }
+  }
+
+  &__text {
+    margin-top: 2rem;
+    width: 25rem;
+    font-size: 1.5rem;
+  }
+}
