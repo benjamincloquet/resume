@@ -45,9 +45,7 @@ const Cards = ({ spring, children }) => {
   const cardDragBind = useDrag(
     ({ movement: [x], down, tap }) => {
       if (!down) {
-        if (tap) {
-          forceSelectedIndex(clampCardIndex(lastSelectedCardIndex + 1));
-        } else {
+        if (!tap) {
           onDragRelease(x);
         }
       } else {
@@ -76,20 +74,29 @@ const Cards = ({ spring, children }) => {
     forceSelectedIndex(cardIndex);
   };
 
+  const handleArrowClick = (side) => {
+    const indexOffset = (side === 'left') ? -1 : 1;
+    forceSelectedIndex(clampCardIndex(lastSelectedCardIndex + indexOffset));
+  };
+
   return (
     <>
       <animated.div className="cards" ref={cardFrameRef} style={cardPerspectiveStyle} {...cardDragBind()}>
-        {getChildrenArray().map((child, index) => (
-          <animated.div key={child.props.id} className="card__container" style={{ transform: computeCardTransform(index) }}>
-            <Card>{child}</Card>
-          </animated.div>
-        ))}
+        <div className="cards__frame">
+          {getChildrenArray().map((child, index) => (
+            <animated.div key={child.props.id} className="card__container" style={{ transform: computeCardTransform(index) }}>
+              <Card>{child}</Card>
+            </animated.div>
+          ))}
+        </div>
+        <button className="cards__arrow cards__arrow--left" type="button" aria-label="Left" onClick={() => handleArrowClick('left')} />
+        <button className="cards__arrow cards__arrow--right" type="button" aria-label="Right" onClick={() => handleArrowClick('right')} />
+        <div className="cards__counter__container">
+          {getChildrenArray().map((child, index) => (
+            <animated.div key={`${child.props.id}-counter`} className="cards__counter" style={computeCounterStyle(index)} onClick={() => handleCounterClick(index)} />
+          ))}
+        </div>
       </animated.div>
-      <div className="cards__counter__container">
-        {getChildrenArray().map((child, index) => (
-          <animated.div key={`${child.props.id}-counter`} className="cards__counter" style={computeCounterStyle(index)} onClick={() => handleCounterClick(index)} />
-        ))}
-      </div>
     </>
   );
 };
