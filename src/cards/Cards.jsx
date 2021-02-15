@@ -55,9 +55,10 @@ const Cards = ({ spring, children }) => {
     {
       initial: () => [getOffsetFromIndex(selectedIndex.getValue()), 0],
     },
+    { useTouch: true },
   );
 
-  const computeCardTransform = (cardIndex) => selectedIndex.interpolate((selectedIndexValue) => `translateX(${getOffsetFromIndex(selectedIndexValue - cardIndex)}px)`);
+  const computeCardTransform = () => selectedIndex.interpolate((selectedIndexValue) => `translateX(${getOffsetFromIndex(selectedIndexValue)}px)`);
 
   const [cardPerspectiveStyle] = usePerspective({ factor: 2 }, cardFrameRef);
 
@@ -80,24 +81,22 @@ const Cards = ({ spring, children }) => {
   };
 
   return (
-    <>
-      <animated.div className="cards" ref={cardFrameRef} style={cardPerspectiveStyle} {...cardDragBind()}>
-        <div className="cards__frame">
-          {getChildrenArray().map((child, index) => (
-            <animated.div key={child.props.id} className="card__container" style={{ transform: computeCardTransform(index) }}>
-              <Card>{child}</Card>
-            </animated.div>
-          ))}
-        </div>
-        <button className="cards__arrow cards__arrow--left" type="button" aria-label="Left" onClick={() => handleArrowClick('left')} />
-        <button className="cards__arrow cards__arrow--right" type="button" aria-label="Right" onClick={() => handleArrowClick('right')} />
-        <div className="cards__counter__container">
-          {getChildrenArray().map((child, index) => (
-            <animated.div key={`${child.props.id}-counter`} className="cards__counter" style={computeCounterStyle(index)} onClick={() => handleCounterClick(index)} />
-          ))}
-        </div>
-      </animated.div>
-    </>
+    <animated.div className="cards" style={cardPerspectiveStyle} {...cardDragBind()}>
+      <button className="cards__arrow cards__arrow--left" type="button" aria-label="Left" onClick={() => handleArrowClick('left')} />
+      <div className="cards__frame" ref={cardFrameRef}>
+        {getChildrenArray().map((child) => (
+          <animated.div key={child.props.id} className="card__container" style={{ transform: computeCardTransform() }}>
+            <Card>{child}</Card>
+          </animated.div>
+        ))}
+      </div>
+      <button className="cards__arrow cards__arrow--right" type="button" aria-label="Right" onClick={() => handleArrowClick('right')} />
+      <div className="cards__counter__container">
+        {getChildrenArray().map((child, index) => (
+          <animated.div key={`${child.props.id}-counter`} className="cards__counter" style={computeCounterStyle(index)} onClick={() => handleCounterClick(index)} />
+        ))}
+      </div>
+    </animated.div>
   );
 };
 

@@ -10,8 +10,8 @@ const ScrollingText = ({ lines, currentLineIndex }) => {
   const computeLineTransform = (lineIndex) => currentLineIndex.interpolate((currentLineIndexValue) => `translateY(${(lineIndex - currentLineIndexValue) * boxHeight}px)`);
 
   return (
-    <div className="scrolling-text__box" ref={ref}>
-      {lines.map((line, index) => <animated.h1 key={line.id} className="scrolling-text" style={{ transform: computeLineTransform(index) }}>{line.value}</animated.h1>)}
+    <div className="scrolling-text" ref={ref}>
+      {lines.map((line, index) => <animated.h1 key={line.id} className="scrolling-text__line" style={{ transform: computeLineTransform(index) }}>{line.value}</animated.h1>)}
     </div>
   );
 };

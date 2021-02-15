@@ -10,9 +10,9 @@ const About = () => {
 
   return (
     <div className="about" ref={perspectiveRef}>
-      <div className="about__img__container">
-        <animated.img className="about__img" src={`${process.env.PUBLIC_URL}/normandie.png`} alt="benjamin cloquet" style={imagePerspectiveStyle} />
-      </div>
+      <animated.div className="about__img__container" style={imagePerspectiveStyle}>
+        <img className="about__img" src={`${process.env.PUBLIC_URL}/normandie.png`} alt="benjamin cloquet" />
+      </animated.div>
       <animated.p className="about__text" style={textPerspectiveStyle}>
         <animated.h1 className="about__title" style={titlePerspectiveStyle}>This is me!</animated.h1>
         I&apos;ve been walking the earth for 24 years and fiddling with code for almost half of that.

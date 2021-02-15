@@ -1,12 +1,10 @@
 .scrolling-text {
-  &__box {
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-  }
+  position: relative;
+  overflow: hidden;
+  width: 100%;
 
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  &__line {
+    position: absolute;
+    display: block;
+  }
 }

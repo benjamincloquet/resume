@@ -1,11 +1,21 @@
+@import '../media.scss';
+
 .projects {
-  padding: 10rem 5rem;
+  padding: 5rem 2rem;
   transform: skewY(-4deg);
 
+  @include sm {
+    padding: 10rem 5rem;
+  }
+
   &__title {
-    font-size: 6.5rem;
+    font-size: 3rem;
     padding-bottom: 3rem;
     margin-left: 1rem;
+
+    @include sm {
+      font-size: 3rem;
+    }
   }
 
   &__box {

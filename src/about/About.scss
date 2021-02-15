@@ -1,12 +1,18 @@
+@import '../media.scss';
+
 .about {
   position: relative;
-  height: 40vh;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  transform: skewY(-4deg);
+  justify-content: flex-start;
+  align-items: center;
   margin: 8rem 0rem;
-  overflow: hidden;
+  flex-direction: column;
+
+  @include lg {
+    transform: skewY(-4deg);
+    flex-direction: row;
+    justify-content: center;
+  }
 
   &__title {
     font-size: 3rem;
@@ -14,23 +20,40 @@
   }
 
   &__img {
+    position: absolute;
     width: 100%;
     height: 100%;
+
+    @include lg {
+      transform: skewY(4deg);
+      width: 105%;
+      height: 105%;
+    }
 
     &__container {
       width: 18rem;
       height: 27rem;
       position: relative;
-      top: -2rem;
-      transform: skewY(4deg);
-      margin-right: 5rem;
+      margin-bottom: 3rem;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      @include lg {
+        margin-bottom: 0;
+        margin-right: 3rem;
+      }
     }
   }
 
   &__text {
-    margin-top: 2rem;
-    width: 25rem;
+    width: 90%;
     font-size: 1.5rem;
     line-height: 2rem;
+
+    @include lg {
+      width: 30%;
+    }
   }
 }
