@@ -1,48 +1,31 @@
 import React from 'react';
-import { useSpring, animated } from 'react-spring';
+import { useSpring } from 'react-spring';
 import Cards from '../cards/Cards';
 import ScrollingText from '../scrolling-text/ScrollingText';
-import LocationIcon from '../svg/LocationIcon';
-import usePerspective from '../usePerspective';
+import TimelineEvent from './TimelineEvent';
 import { titleLines, years } from './timeline-data';
-import './Timeline.scss';
 
 const renderTimelineEvents = () => [
-  <div id="event1" key="event1-content">
-    <h1 className="timeline__event__title">Master&apos;s degree in engineering</h1>
-    <div className="timeline__event__location">
-      <LocationIcon />
-      <h2>Telecom SudParis, France</h2>
-    </div>
-    <p className="timeline__event__description">
+  <TimelineEvent id="event1" key="event1-content" title="Master&apos;s degree in engineering" location="Telecom SudParis, France">
+    <p className="text-2xl text-justify bg-white">
       I learned software engineering, management and
       {' '}
-      <a href="https://kevcouscous.itch.io/koro-unijam2017" onClick={(e) => { e.stopPropagation(); }}>the ins and outs of making a video game in 48 hours.</a>
+      <a href="https://kevcouscous.itch.io/koro-unijam2017" className="font-medium background-swipe-black py-1"><span className="text-white difference">the ins and outs of making a video game in 48 hours.</span></a>
     </p>
-  </div>,
-  <div id="event2" key="event2-content">
-    <h1 className="timeline__event__title">Data visualization programming internship</h1>
-    <div className="timeline__event__location">
-      <LocationIcon />
-      <h2>Universiti Teknologi PETRONAS, Malaysia</h2>
-    </div>
-    <p className="timeline__event__description">
+  </TimelineEvent>,
+  <TimelineEvent id="event2" key="event2-content" title="Data visualization programming internship" location="Universiti Teknologi PETRONAS, Malaysia">
+    <p className="text-2xl text-justify bg-white">
       I collaborated with machine learning researchers and developed a
       {' '}
-      <a href="https://github.com/kyoshiro10500/GA-Viz">data visualization app for genetic algorithms.</a>
+      <a href="https://github.com/kyoshiro10500/GA-Viz" className="font-medium background-swipe-black py-1"><span className="text-white difference">data visualization app for genetic algorithms.</span></a>
     </p>
-  </div>,
-  <div id="event3" key="event3-content">
-    <h1 className="timeline__event__title">Ubisoft</h1>
-    <div className="timeline__event__location">
-      <LocationIcon />
-      <h2>Montpellier, France</h2>
-    </div>
-    <p className="timeline__event__description">
+  </TimelineEvent>,
+  <TimelineEvent id="event3" key="event3-content" title="Ubisoft" location="Montpellier, France">
+    <p className="text-2xl text-justify bg-white">
       I implemented gameplay mechanics in C++ on
       {' '}
       {' '}
-      <a href="https://www.youtube.com/watch?v=BLWt9MQLVgU">Tom Clancy&apos;s Ghost Recon Breakpoint</a>
+      <a href="https://www.youtube.com/watch?v=BLWt9MQLVgU" className="font-medium background-swipe-black py-1"><span className="text-white difference">Tom Clancy&apos;s Ghost Recon Breakpoint</span></a>
       {' '}
       during the beta, debugging and post-launch cycles.
       {' '}
@@ -51,52 +34,50 @@ const renderTimelineEvents = () => [
       {' '}
       <a href="https://www.youtube.com/watch?v=CC3GA2ddWFU">Riders Republic.</a>
     </p>
-  </div>,
-  <div id="event4" key="event4-content">
-    <h1 className="timeline__event__title">Full-stack web projects</h1>
-    <div className="timeline__event__location">
-      <LocationIcon />
-      <h2>Montpellier, France</h2>
-    </div>
-    <p className="timeline__event__description">
+  </TimelineEvent>,
+  <TimelineEvent id="event4" key="event4-content" title="Full-stack web projects" location="Montpellier, France">
+    <p className="text-2xl text-justify bg-white">
       I made the best of lockdown and learned Javascript from the bottom up,
       eventually picking my stack :
       React, Node, Express and MongoDB.
       <br />
       Take a look at my projects below!
     </p>
-  </div>,
+  </TimelineEvent>,
 ];
 
 const Timeline = () => {
-  const [titlePerspectiveStyle, perspectiveRef] = usePerspective({ factor: 3 });
-  const [cardsPerspectiveStyle] = usePerspective({ factor: 6 }, perspectiveRef);
-  const [yearPerspectiveStyle] = usePerspective({ factor: 2 }, perspectiveRef);
-
   const [{ selectedIndex }, setSpring] = useSpring(() => ({
     selectedIndex: 0,
   }));
 
   return (
-    <div className="timeline" ref={perspectiveRef}>
-      <animated.div className="timeline__title__container" style={titlePerspectiveStyle}>
-        <h1 className="timeline__title">My experience as</h1>
-        <ScrollingText
-          lines={titleLines}
-          currentLineIndex={selectedIndex}
-        />
-      </animated.div>
-      <animated.div className="timeline__year" style={yearPerspectiveStyle}>
-        <ScrollingText lines={years} currentLineIndex={selectedIndex} />
-      </animated.div>
-      <animated.div className="timeline__events" style={cardsPerspectiveStyle}>
+    <section className="w-full py-40 flex flex-col justify-start items-center bg-white space-y-8 skew">
+      <div className="container w-7/12 flex flex-col space-y-8">
+        <div className="flex flex-row justify-between">
+          <div>
+            <h1 className="text-black text-7xl">My experience as</h1>
+            <ScrollingText
+              lines={titleLines}
+              className="h-20"
+              lineClassName="text-7xl"
+              currentLineIndex={selectedIndex}
+            />
+          </div>
+          <ScrollingText
+            lines={years}
+            className="h-40 flex-grow"
+            lineClassName="text-10xl text-stroke-black text-transparent right-4 top-0"
+            currentLineIndex={selectedIndex}
+          />
+        </div>
         <Cards
           spring={[{ selectedIndex }, setSpring]}
         >
           {renderTimelineEvents()}
         </Cards>
-      </animated.div>
-    </div>
+      </div>
+    </section>
   );
 };
 

@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: AlteHaasGroteskBold;
+    src: local('AlteHaasGroteskBold'), url(./fonts/AlteHaasGroteskBold.ttf) format('opentype');
+  }
+
+  @font-face {
+    font-family: AlteHaasGrotesk;
+    src: local('AlteHaasGrotesk'), url(./fonts/AlteHaasGroteskRegular.ttf) format('opentype');
+  }
+
+  h1, h2, h3, h4, h5, h6, legend {
+    @apply font-alte-bold no-select;
+  }
+  
+  a, p {
+    @apply font-alte no-select;
+  }
+
+  button {
+    @apply no-outline;
+  }
+
+  .background-swipe-black {
+    @apply bg-left-top bg-no-repeat bg-gradient-to-r from-black to-black bg-0% hover:bg-100% transition-bg-size;
+  }
+
+  .background-swipe-white {
+    @apply bg-left-top bg-no-repeat bg-gradient-to-r from-white to-white bg-0% hover:bg-100% transition-bg-size;
+  }
+}

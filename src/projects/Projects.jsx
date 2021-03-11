@@ -3,20 +3,20 @@ import { animated } from 'react-spring';
 import projects from './projects-data';
 import Project from './Project';
 import usePerspective from '../usePerspective';
-import './Projects.scss';
 
 const Projects = () => {
-  const [titlePerspective, titleRef] = usePerspective({ factor: 2 });
-
+  const [perspectiveStyle, perspectiveRef] = usePerspective({ factor: 3 });
   return (
-    <div className="projects" ref={titleRef}>
-      <animated.h1 className="projects__title" style={titlePerspective}>My projects</animated.h1>
-      <div className="projects__box">
-        {projects.map((project) => (
-          <Project key={project.id} project={project} />
-        ))}
+    <section className="w-full py-40 flex flex-col justify-start items-center bg-green space-y-8 skew" ref={perspectiveRef}>
+      <div className="container w-7/12 flex flex-col space-y-16">
+        <h1 className="text-black text-7xl">My projects</h1>
+        <animated.div className="flex flex-row flex-wrap" style={perspectiveStyle}>
+          {projects.map((project) => (
+            <Project key={project.id} project={project} />
+          ))}
+        </animated.div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Card.scss';
 
 const Card = ({ children }) => (
-  <div className="card">
+  <div className="w-full">
     {children}
   </div>
 );
