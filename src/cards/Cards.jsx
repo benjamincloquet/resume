@@ -99,7 +99,7 @@ const Cards = ({ spring, children }) => {
       </div>
       <div className="flex flex-row space-x-2">
         {getChildrenArray().map((child, index) => (
-          <animated.div key={`${child.props.id}-counter`} className="w-4 h-4 rounded-full border-2 border-black cursor-pointer" style={computeCounterStyle(index)} onClick={() => handleCounterClick(index)} />
+          <animated.div key={`${child.props.id}-counter`} className="w-4 h-4 rounded-full border-2 border-solid border-black cursor-pointer" style={computeCounterStyle(index)} onClick={() => handleCounterClick(index)} />
         ))}
       </div>
     </div>

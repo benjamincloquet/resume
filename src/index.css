@@ -32,4 +32,8 @@
   .background-swipe-white {
     @apply bg-left-top bg-no-repeat bg-gradient-to-r from-white to-white bg-0% hover:bg-100% transition-bg-size;
   }
+
+  .box-shadow-green {
+    @apply w-full h-full bg-green-dark absolute top-2 left-2 z-20
+  }
 }
