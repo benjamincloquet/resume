@@ -7,7 +7,7 @@ const Project = ({
   },
 }) => (
   <div className={`flex-grow mx-2 my-2 ${large ? 'w-full' : 'w-1/3'}`}>
-    <div className="bg-green border-4 w-full border-black hover:shadow transition transform hover:-translate-x-2 hover:-translate-y-2 ease-in-out duration-500">
+    <div className="bg-green border-4 w-full border-black border-solid hover:shadow transition transform hover:-translate-x-2 hover:-translate-y-2 ease-in-out duration-500">
       <a href={link} className="">
         <div className="w-full h-full background-swipe-white px-4 py-4">
           <h1 className="text-3xl inline-block">{title}</h1>

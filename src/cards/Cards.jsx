@@ -77,7 +77,7 @@ const Cards = ({ spring, children }) => {
   };
 
   return (
-    <div className="flex flex-col items-center space-y-8 border-green border-4 py-12 transform hover:-translate-x-2 hover:-translate-y-2 transition ease-in-out duration-500">
+    <div className="flex flex-col items-center space-y-8 border-green border-solid border-4 py-12 transform hover:-translate-x-2 hover:-translate-y-2 transition ease-in-out duration-500">
       <div className="relative flex flex-row justify-center w-full" {...cardDragBind()}>
         <button className="w-1/12 flex-none flex justify-center items-center no-outline" type="button" aria-label="Left" onClick={() => handleArrowClick('left')}>
           <svg className="w-1/2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
