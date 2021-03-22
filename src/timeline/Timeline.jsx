@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSpring } from 'react-spring';
+import Section from '../Section';
 import Cards from '../cards/Cards';
 import ScrollingText from '../scrolling-text/ScrollingText';
 import TimelineEvent from './TimelineEvent';
@@ -52,32 +53,30 @@ const Timeline = () => {
   }));
 
   return (
-    <section className="w-full py-40 flex flex-col justify-start items-center bg-white space-y-8 skew">
-      <div className="container w-7/12 flex flex-col space-y-8">
-        <div className="flex flex-row justify-between">
-          <div>
-            <h1 className="text-black text-7xl">My experience as</h1>
-            <ScrollingText
-              lines={titleLines}
-              className="h-20"
-              lineClassName="text-7xl"
-              currentLineIndex={selectedIndex}
-            />
-          </div>
+    <Section className="bg-white skew" containerClassName="flex flex-col space-y-8">
+      <div className="flex flex-col lg:flex-row lg:justify-between">
+        <div>
+          <h1 className="text-black text-7xl">My experience as</h1>
           <ScrollingText
-            lines={years}
-            className="h-40 flex-grow"
-            lineClassName="text-10xl text-stroke-black text-transparent right-4 top-0"
+            lines={titleLines}
+            className="h-20"
+            lineClassName="text-7xl"
             currentLineIndex={selectedIndex}
           />
         </div>
-        <Cards
-          spring={[{ selectedIndex }, setSpring]}
-        >
-          {renderTimelineEvents()}
-        </Cards>
+        <ScrollingText
+          lines={years}
+          className="h-40 flex-grow"
+          lineClassName="text-10xl text-stroke-black text-transparent lg:right-4 top-0"
+          currentLineIndex={selectedIndex}
+        />
       </div>
-    </section>
+      <Cards
+        spring={[{ selectedIndex }, setSpring]}
+      >
+        {renderTimelineEvents()}
+      </Cards>
+    </Section>
   );
 };
 

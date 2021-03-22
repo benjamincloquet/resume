@@ -86,7 +86,7 @@ const Cards = ({ spring, children }) => {
         </button>
         <div className="relative flex overflow-hidden cursor-grab" ref={cardFrameRef}>
           {getChildrenArray().map((child) => (
-            <animated.div key={child.props.id} className="w-full flex-none px-8" style={{ transform: computeCardTransform() }}>
+            <animated.div key={child.props.id} className="w-full flex-none px-8" style={{ transform: computeCardTransform(), touchAction: 'none' }}>
               <Card>{child}</Card>
             </animated.div>
           ))}

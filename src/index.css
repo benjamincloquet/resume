@@ -13,10 +13,6 @@
     src: local('AlteHaasGrotesk'), url(./fonts/AlteHaasGroteskRegular.ttf) format('opentype');
   }
 
-  html {
-    @apply overflow-x-hidden;
-  }
-
   h1, h2, h3, h4, h5, h6, legend {
     @apply font-alte-bold no-select;
   }
