@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useLayoutEffect, useRef, useState } from 'react';
 
 const useElementBoundingRect = (existingRef) => {

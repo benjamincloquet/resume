@@ -24,6 +24,9 @@ module.exports = {
       cursor: {
         grab: 'grab',
       },
+      lineHeight: {
+        '7xl': '5.5rem',
+      },
     },
     backgroundSize: {
       '0%': '0%',

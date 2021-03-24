@@ -4,7 +4,6 @@ import Section from '../Section';
 import Cards from '../cards/Cards';
 import ScrollingText from '../scrolling-text/ScrollingText';
 import TimelineEvent from './TimelineEvent';
-import { titleLines, years } from './timeline-data';
 
 const renderTimelineEvents = () => [
   <TimelineEvent id="event1" key="event1-content" title="Master&apos;s degree in engineering" location="Telecom SudParis, France">
@@ -54,22 +53,36 @@ const Timeline = () => {
 
   return (
     <Section className="bg-white skew" containerClassName="flex flex-col space-y-8">
-      <div className="flex flex-col lg:flex-row lg:justify-between">
-        <div>
-          <h1 className="text-black text-7xl">My experience as</h1>
+      <div className="flex flex-col flex-wrap lg:flex-row lg:justify-between">
+        <div className="flex-shrink-0 flex flex-col">
+          <h1 className="text-black text-7xl inline-block">My experience as</h1>
           <ScrollingText
-            lines={titleLines}
-            className="h-20"
-            lineClassName="text-7xl"
+            className="inline-block"
+            textClassName="text-7xl leading-7xl"
             currentLineIndex={selectedIndex}
-          />
+          >
+            a student
+            <br />
+            an intern
+            <br />
+            a programmer
+            <br />
+            a web developer
+          </ScrollingText>
         </div>
         <ScrollingText
-          lines={years}
-          className="h-40 flex-grow"
-          lineClassName="text-10xl text-stroke-black text-transparent lg:right-4 top-0"
+          className="inline-block"
+          textClassName="text-10xl text-stroke-black text-transparent"
           currentLineIndex={selectedIndex}
-        />
+        >
+          2018
+          <br />
+          2018
+          <br />
+          2019
+          <br />
+          2020
+        </ScrollingText>
       </div>
       <Cards
         spring={[{ selectedIndex }, setSpring]}

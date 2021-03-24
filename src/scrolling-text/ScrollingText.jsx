@@ -1,28 +1,34 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { animated } from 'react-spring';
-import { useHeight } from '../useElementBoundingRect';
 
 const ScrollingText = ({
-  lines, className, lineClassName, currentLineIndex,
+  className, textClassName, currentLineIndex, children,
 }) => {
-  const [boxHeight, ref] = useHeight();
+  const ref = useRef(null);
+  const [lineHeight, setLineHeight] = useState(0);
 
-  const computeLineTransform = (lineIndex) => currentLineIndex.interpolate((currentLineIndexValue) => `translateY(${(lineIndex - currentLineIndexValue) * boxHeight}px)`);
+  useEffect(() => {
+    setLineHeight(getComputedStyle(ref.current)['line-height'].split('px')[0]);
+  }, [ref]);
+
+  const computeLineTransform = () => currentLineIndex.interpolate((currentLineIndexValue) => `translateY(${-currentLineIndexValue * lineHeight}px)`);
 
   return (
-    <div className={`relative overflow-hidden ${className}`} ref={ref}>
-      {lines.map((line, index) => <animated.h1 key={line.id} className={`absolute ${lineClassName}`} style={{ transform: computeLineTransform(index) }}>{line.value}</animated.h1>)}
+    <div className={`overflow-hidden ${className}`} style={{ height: `${lineHeight}px` }}>
+      <animated.h1 ref={ref} className={`relative ${textClassName}`} style={{ transform: computeLineTransform() }}>
+        {children}
+      </animated.h1>
     </div>
   );
 };
 
 ScrollingText.propTypes = {
-  lines: PropTypes.arrayOf(PropTypes.object).isRequired,
   className: PropTypes.string.isRequired,
-  lineClassName: PropTypes.string.isRequired,
+  textClassName: PropTypes.string.isRequired,
   // eslint-disable-next-line react/forbid-prop-types
   currentLineIndex: PropTypes.object.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default ScrollingText;
