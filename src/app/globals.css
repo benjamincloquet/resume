@@ -25,3 +25,23 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.caret {
+  display: inline-block;
+  width: 0.8rem;
+  height: 1.2rem;
+  margin-bottom: -0.1rem;
+  margin-left: 0.2rem;
+  background-color: currentColor;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
