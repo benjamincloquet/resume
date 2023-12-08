@@ -4,7 +4,7 @@ import Button from "./Button";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 pt-36 lg:pt-24">
+    <main className="flex min-h-screen flex-col items-center justify-between px-10 pb-24 pt-36 lg:p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <div className="fixed left-0 top-0 flex w-full justify-center pb-6 pt-8 lg:static lg:w-auto  lg:rounded-xl lg:p-4 overflow-hidden">
           <Image
