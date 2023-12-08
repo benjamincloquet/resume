@@ -2,7 +2,7 @@
 const nextConfig = {
   output: process.env.NODE_ENV === 'production' ? 'export' : 'standalone',
   basePath: process.env.NODE_ENV === 'production' ? '/resume' : '',
-  //assetPrefix: process.env.NODE_ENV === "production" ? "/resume/" : undefined,
+  assetPrefix: process.env.NODE_ENV === "production" ? "." : '',
 }
 
 module.exports = nextConfig
