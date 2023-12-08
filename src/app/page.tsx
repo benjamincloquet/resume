@@ -8,7 +8,7 @@ export default function Home() {
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <div className="fixed left-0 top-0 flex w-full justify-center pb-6 pt-8 lg:static lg:w-auto  lg:rounded-xl lg:p-4 overflow-hidden">
           <Image
-            src="/portrait.jpg"
+            src="/static/portrait.jpg"
             alt="Benjamin Cloquet"
             className="rounded-full scale-100"
             width={100}
@@ -27,7 +27,7 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             <Image
-              src="/linkedin.svg"
+              src="/static/linkedin.svg"
               alt="LinkedIn Logo"
               className="dark:invert"
               width={48}
@@ -42,7 +42,7 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             <Image
-              src="/github.svg"
+              src="/static/github.svg"
               alt="GitHub Logo"
               className="dark:invert"
               width={48}
