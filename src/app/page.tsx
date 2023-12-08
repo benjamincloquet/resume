@@ -10,7 +10,7 @@ export default function Home() {
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <div className="fixed left-0 top-0 flex w-full justify-center pb-6 pt-8 lg:static lg:w-auto  lg:rounded-xl lg:p-4 overflow-hidden">
           <Image
-            src={`/static/portrait.jpg`}
+            src={`portrait.jpg`}
             alt="Benjamin Cloquet"
             className="rounded-full scale-100"
             width={100}
