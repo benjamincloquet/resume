@@ -3,12 +3,14 @@ import Hero from "./Hero";
 import Button from "./Button";
 
 export default function Home() {
+  const basePath = process.env.NODE_ENV === 'production' ? '/resume' : '';
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
         <div className="fixed left-0 top-0 flex w-full justify-center pb-6 pt-8 lg:static lg:w-auto  lg:rounded-xl lg:p-4 overflow-hidden">
           <Image
-            src="/static/portrait.jpg"
+            src={`${basePath}/static/portrait.jpg`}
             alt="Benjamin Cloquet"
             className="rounded-full scale-100"
             width={100}
@@ -27,7 +29,7 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             <Image
-              src="/static/linkedin.svg"
+              src={`${basePath}/static/linkedin.svg`}
               alt="LinkedIn Logo"
               className="dark:invert"
               width={48}
@@ -42,7 +44,7 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             <Image
-              src="/static/github.svg"
+              src={`${basePath}/static/github.svg`}
               alt="GitHub Logo"
               className="dark:invert"
               width={48}
