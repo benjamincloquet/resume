@@ -4,12 +4,12 @@ import { useRef, useState, useEffect } from "react";
 
 const Hero = () => {
   const fullText = useRef(
-    "I am a front end engineer ! I have been designing and implementing software solutions for more than 5 years, working with Ubisoft, CGI, Atos and more. My tools of choice are Next.js with TypeScript.",
+    "I am a front end engineer ! I have been designing and implementing software solutions for more than five years, working with Ubisoft, CGI, Atos and more. My tools of choice are Next.js with TypeScript.",
   );
   const [text, setText] = useState("");
   const [caretPosition, setCaretPosition] = useState(0);
   const delay = useRef(80);
-  const isDone = caretPosition > fullText.current.length / 2
+  const isDone = caretPosition > fullText.current.length
 
   useEffect(() => {
     const type = () => {
