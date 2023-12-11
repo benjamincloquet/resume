@@ -4,21 +4,23 @@ import { useRef, useState, useEffect } from "react";
 
 const Hero = () => {
   const fullText = useRef(
-    "I am a front end engineer ! I have been designing and implementing software solutions for more than 5 years, working with Ubisoft, CGI, Atos and more. My tools of choice are React - or Vue.js - with TypeScript.",
+    "I am a front end engineer ! I have been designing and implementing software solutions for more than 5 years, working with Ubisoft, CGI, Atos and more. My tools of choice are Next.js with TypeScript.",
   );
   const [text, setText] = useState("");
+  const [caretPosition, setCaretPosition] = useState(0);
   const delay = useRef(80);
-  const isDone = text.length === fullText.current.length
-
-  const type = () => {
-    if (isDone)
-      return
-    setText(fullText.current.substring(0, text.length + 1))
-  };
+  const isDone = caretPosition > fullText.current.length / 2
 
   useEffect(() => {
+    const type = () => {
+      if (isDone)
+        return
+      setCaretPosition(caretPosition + 1)
+      setText(fullText.current.substring(0, caretPosition) + ' '.repeat(fullText.current.length - caretPosition))
+    };
+
     setTimeout(type, delay.current);
-  }, [text]);
+  }, [text, isDone, caretPosition]);
 
   return (
     <div className="font-mono">
